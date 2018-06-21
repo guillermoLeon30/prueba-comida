@@ -16,7 +16,6 @@
   import carrusel from './Comida/carrusel'
 
   export default {
-    name: 'landing-page',
     components: { carrusel }
   }
 </script>

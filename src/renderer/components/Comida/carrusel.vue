@@ -38,6 +38,14 @@
   </div>
 </template>
 
-<script type="text/javascript"></script>
+<script type="text/javascript">
+  export default{
+    data () {
+      return {
+        comida: null
+      }
+    }
+  }
+</script>
 
 <style type="text/css"></style>

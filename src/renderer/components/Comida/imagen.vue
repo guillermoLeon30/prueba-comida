@@ -1,6 +1,6 @@
 <template>
   <div class="carousel-item" :class="{ active: isActive }">
-    <img class="d-block w-100" :src="{{ url }}" alt="imagen">
+    <img class="d-block w-100" :src="url" alt="imagen">
     <div class="carousel-caption d-none d-md-block">
       <h5>{{ nombre }}</h5>
       <p>${{ precio }}</p>

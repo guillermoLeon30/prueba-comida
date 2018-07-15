@@ -39,7 +39,12 @@
     <div class="col">
       <div id="carouselControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <imagen></imagen>
+          <imagen 
+            v-for="(comida, index) in comidas"
+            :url="comida.url"
+            :nombre="comida.nombre"
+            :precio="comida.precio"
+          ></imagen>
         </div>
         <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -61,7 +66,22 @@
     components: { imagen },
     data () {
       return {
-        comida: [
+        comidas: [
+          {
+            url: 'static/1.jpg',
+            nombre: 'Almuerzo',
+            precio: '3.25'
+          },
+          {
+            url: 'static/2jpg.jpg',
+            nombre: 'Merienda',
+            precio: '2.50'
+          },
+          {
+            url: 'static/3.jpg',
+            nombre: 'Desayuno',
+            precio: '2.00'
+          }
         ]
       }
     }

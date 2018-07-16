@@ -53,12 +53,12 @@
     },
     methods: {
       listen: function () {
-        Echo.channel('menuChannel').listen('comida', (e) => {
-          console.log(e)
+        this.$echo.private('team.1').listen('NewBlogPost', (payload) => {
+          console.log(payload)
         })
       }
     },
-    mounted: function () {
+    mounted () {
       this.listen()
     }
   }

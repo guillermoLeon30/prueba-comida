@@ -50,6 +50,16 @@
           }
         ]
       }
+    },
+    methods: {
+      listen: function () {
+        Echo.channel('menuChannel').listen('comida', (e) => {
+          console.log(e)
+        })
+      }
+    },
+    mounted: function () {
+      this.listen()
     }
   }
 </script>

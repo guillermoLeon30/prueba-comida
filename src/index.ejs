@@ -23,7 +23,18 @@
 
     <!-- webpack builds are automatically injected -->
     <script type="text/javascript">
-      window.jQuery = window.$ = require('jquery');
+      window.jQuery = window.$ = require('jquery')
+
+      Echo = require('laravel-echo')
+
+      window.Pusher = require('pusher-js')
+
+      window.Echo = new Echo({
+        broadcaster: 'pusher',
+        key: '1a7c234fb4766066b053',
+        cluster: 'us2',
+        encrypted: false
+      })
     </script>
 
     <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.js"></script>

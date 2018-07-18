@@ -53,12 +53,10 @@
     },
     methods: {
       listen: function () {
-        this.$echo.private('team.1').listen('NewBlogPost', (payload) => {
-          console.log(payload)
-        })
+        console.log('data')
       }
     },
-    mounted () {
+    created () {
       this.listen()
     }
   }

@@ -5,7 +5,7 @@
         <div class="carousel-inner">
           <imagen 
             v-for="(comida, index) in comidas"
-            :url="comida.url"
+            :url="comida.imagen_url"
             :nombre="comida.nombre"
             :precio="comida.precio"
             :isActive="index == 0"
@@ -27,6 +27,7 @@
 
 <script type="text/javascript">
   import imagen from './imagen'
+  import pusher from '../../../library/echo'
 
   export default{
     components: { imagen },
@@ -34,17 +35,17 @@
       return {
         comidas: [
           {
-            url: 'static/1.jpg',
+            imagen_url: 'static/1.jpg',
             nombre: 'Almuerzo',
             precio: '3.25'
           },
           {
-            url: 'static/2jpg.jpg',
+            imagen_url: 'static/2jpg.jpg',
             nombre: 'Merienda',
             precio: '2.50'
           },
           {
-            url: 'static/3.jpg',
+            imagen_url: 'static/3.jpg',
             nombre: 'Desayuno',
             precio: '2.00'
           }
@@ -53,7 +54,11 @@
     },
     methods: {
       listen: function () {
-        console.log('data')
+        var channel = pusher.subscribe('menuChannel')
+        channel.bind('App\\Events\\ActivarMenuEvent', function (data) {
+          this.comidas = data
+          console.log(this.comidas)
+        })
       }
     },
     created () {

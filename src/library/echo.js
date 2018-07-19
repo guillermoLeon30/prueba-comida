@@ -1,12 +1,20 @@
 'use strict'
 
-import Echo from 'laravel-echo'
-
+import Pusher from 'pusher-js'
+// import Echo from 'laravel-echo'
+/*
 var echo = new Echo({
   broadcaster: 'pusher',
-  key: 'your-pusher-key',
-  cluster: 'eu',
+  key: '1a7c234fb4766066b053',
+  cluster: 'us2',
+  encrypted: true
+})
+*/
+
+var pusher = new Pusher('1a7c234fb4766066b053', {
+  cluster: 'us2',
   encrypted: true
 })
 
-module.exports = echo
+// export default echo
+export default pusher

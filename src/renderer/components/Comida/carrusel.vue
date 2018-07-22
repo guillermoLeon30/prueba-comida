@@ -31,37 +31,20 @@
 
   export default{
     components: { imagen },
-    data () {
+    data: function () {
       return {
-        comidas: [
-          {
-            imagen_url: 'static/1.jpg',
-            nombre: 'Almuerzo',
-            precio: '3.25'
-          },
-          {
-            imagen_url: 'static/2jpg.jpg',
-            nombre: 'Merienda',
-            precio: '2.50'
-          },
-          {
-            imagen_url: 'static/3.jpg',
-            nombre: 'Desayuno',
-            precio: '2.00'
-          }
-        ]
+        comidas: null
       }
     },
     methods: {
       listen: function () {
         var channel = pusher.subscribe('menuChannel')
-        channel.bind('App\\Events\\ActivarMenuEvent', function (data) {
+        channel.bind('App\\Events\\ActivarMenuEvent', data => {
           this.comidas = data
-          console.log(this.comidas)
         })
       }
     },
-    created () {
+    mounted () {
       this.listen()
     }
   }

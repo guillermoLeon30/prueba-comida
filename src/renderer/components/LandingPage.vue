@@ -8,7 +8,12 @@
       </div>
     </div>
 
-    <carrusel></carrusel>
+    <div class="row">
+      <div class="col">
+        <carrusel></carrusel>        
+      </div>
+    </div>
+
   </div>
 </template>
 

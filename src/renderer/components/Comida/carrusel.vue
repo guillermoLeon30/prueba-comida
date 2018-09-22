@@ -1,25 +1,25 @@
 <template>
-  <div class="row">
-    <div class="col">
-      <div id="carouselControls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <imagen 
-            v-for="(comida, index) in comidas"
-            :url="comida.imagen_url"
-            :nombre="comida.nombre"
-            :precio="comida.precio"
-            :isActive="index == 0"
-          >
-          </imagen>
+  <div>
+    <div class="accordion" id="accordionExample" v-for="(menu,index) in menus">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              {{ menu.nombre }}
+              <img :src="menu.imagen" alt="" height="50px" width="100px">
+            </button>
+          </h5>
         </div>
-        <a class="carousel-control-prev" href="#carouselControls" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselControls" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+            <ul v-for="(item,index) in menu.items">
+              <img :src="item.imagen" alt="" height="50px" width="100px">
+              {{ item.nombre }}
+               ${{ item.precio }}
+            </ul>  
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -31,37 +31,21 @@
 
   export default{
     components: { imagen },
-    data () {
+    data: function () {
       return {
-        comidas: [
-          {
-            imagen_url: 'static/1.jpg',
-            nombre: 'Almuerzo',
-            precio: '3.25'
-          },
-          {
-            imagen_url: 'static/2jpg.jpg',
-            nombre: 'Merienda',
-            precio: '2.50'
-          },
-          {
-            imagen_url: 'static/3.jpg',
-            nombre: 'Desayuno',
-            precio: '2.00'
-          }
-        ]
+        menus: null
       }
     },
     methods: {
       listen: function () {
-        var channel = pusher.subscribe('menuChannel')
-        channel.bind('App\\Events\\ActivarMenuEvent', function (data) {
-          this.comidas = data
-          console.log(this.comidas)
+        var channel = pusher.subscribe('local')
+        channel.bind('App\\Events\\ditrubComida', data => {
+          console.log(data)
+          this.menus = data.menus
         })
       }
     },
-    created () {
+    mounted () {
       this.listen()
     }
   }
